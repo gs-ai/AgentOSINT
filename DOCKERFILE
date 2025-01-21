@@ -1,0 +1,18 @@
+# Use a base Python image
+FROM python:3.9-slim
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python requirements
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
+COPY . /app
+
+# Set default command to run Flask server
+CMD ["python", "agentosint/core/webserver.py"]

@@ -1,0 +1,46 @@
+AgentOSINT/
+├── agentosint/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── pipeline.py
+│   │   ├── concurrent_pipeline.py
+│   │   ├── logger.py
+│   │   ├── module_registry.py
+│   │   ├── config.py
+│   │   └── webserver.py          # (Optional) Minimal Flask or FastAPI app
+│   ├── modules/
+│   │   ├── __init__.py
+│   │   ├── holehe_module.py
+│   │   ├── infoga_module.py
+│   │   ├── sn0int_module.py
+│   │   ├── whatsmyname_module.py
+│   │   ├── creepy_module.py
+│   │   ├── phoneinfoga_module.py
+│   │   ├── tidos_module.py
+│   │   ├── massdns_module.py
+│   │   ├── metagoofil_module.py
+│   │   ├── scrapling_module.py
+│   │   ├── dorkscraper_module.py
+│   │   ├── breacheddatascraper_module.py
+│   │   ├── xnldorker_module.py
+│   │   ├── waymore_module.py
+│   │   ├── camoufox_module.py
+│   │   └── ai_llama_module.py    # NEW: LLaMA-based AI module
+│   └── utils/
+│       ├── __init__.py
+│       └── helper.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_modules.py           # or multiple test files per module
+│   └── test_ai_llama_module.py   # (Optional) example test for AI
+├── .gitignore
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── Dockerfile                    # For containerizing AgentOSINT
+├── LICENSE
+├── README.md
+├── requirements.txt
+└── setup.py

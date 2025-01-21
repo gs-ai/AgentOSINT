@@ -1,0 +1,26 @@
+# Core requirements
+flask                     # For web server functionality
+requests                  # For HTTP requests (used in modules like ai_llama_module)
+concurrent.futures        # For concurrent pipeline handling
+
+# AI and LLM-related dependencies
+torch                     # PyTorch for LLMs
+transformers              # Hugging Face Transformers for AI module integration
+
+# OSINT Modules
+holehe                    # For email OSINT
+infoga                    # For gathering information about emails/domains
+sn0int                    # Advanced OSINT framework
+whatsmyname               # Username enumeration
+creepy                    # Geolocation-based OSINT
+phoneinfoga               # Phone number reconnaissance
+tidos-framework           # Web application vulnerability scanner
+massdns                   # High-performance DNS resolver
+metagoofil                # Metadata extraction tool
+scrapli                  # Web scraping library
+waymore                   # Subdomain enumeration
+dorks-eye                 # Search engine dorking
+
+# Utilities
+pytest                    # For testing
+logging                   # For structured logging in modules
