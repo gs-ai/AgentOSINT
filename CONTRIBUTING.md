@@ -1,4 +1,4 @@
-# Contributing to [Project Name]
+# Contributing to AgentOSINT
 
 We welcome contributions! By participating, you agree to abide by our Code of Conduct.
 
