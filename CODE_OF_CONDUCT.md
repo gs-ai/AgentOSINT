@@ -13,4 +13,4 @@ Examples of unacceptable behavior:
 - Public or private insult or discrimination.
 
 ## Enforcement
-Instances of abusive behavior may be reported to the project maintainers at [email@example.com].
+Instances of abusive behavior may be reported to the project maintainers via this repository. 
