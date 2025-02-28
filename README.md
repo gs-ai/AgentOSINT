@@ -154,5 +154,3 @@ Use AgentOSINT responsibly and ensure compliance with all applicable laws. OSINT
 
 For more information, visit the [GitHub repository](https://github.com/gs-ai/AgentOSINT).
 ```
-
-This is the complete `README.md` file optimized for clarity and usability. You can copy and paste this into your terminal or text editor. Let me know if further edits are needed!
