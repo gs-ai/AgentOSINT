@@ -1,156 +1,131 @@
-```markdown
 # AgentOSINT
 
-An agent for your OSINT.
+An advanced OSINT framework for professionals.
 
-AgentOSINT is a Python-based open-source intelligence (OSINT) framework that helps analysts gather, correlate, and visualize data from various public sources. It aims to provide:
+AgentOSINT is a Python-based open-source intelligence (OSINT) framework designed for analysts to efficiently collect, correlate, and visualize data from public sources. It provides:
 
-- **Modular architecture** for adding new OSINT data-collection modules.
-- **Flexible command-line interface** for quick and repeatable data gathering.
-- **Scalable design** for integration with other tools and APIs.
+- **Modular architecture** for seamless addition of OSINT data-collection modules.
+- **Command-line interface (CLI)** for streamlined and repeatable data gathering.
+- **Scalability** for integration with databases, APIs, and analytics tools.
 
 ---
 
 ## Features
 
-- **Modular plugin system**: Easily build or integrate new scrapers and data-collection modules.
-- **CLI-based usage**: Simple command-line interface to launch OSINT tasks.
-- **Integration**: Hooks for databases and analytics platforms.
+- **Extensible plugin system**: Easily integrate custom scrapers and data-collection modules.
+- **CLI-based execution**: Lightweight and fast OSINT workflows from the terminal.
+- **Database integration**: Supports storage and retrieval of intelligence data.
+- **Pipeline automation**: Define OSINT workflows for multi-step data collection.
 
 ---
 
 ## Installation
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/gs-ai/AgentOSINT.git
-    cd AgentOSINT
-    ```
+### Clone the Repository
+```bash
+git clone https://github.com/gs-ai/AgentOSINT.git
+cd AgentOSINT
+```
 
-2. (Optional) Create and activate a virtual environment:
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate   # Mac/Linux
-    venv\Scripts\activate      # Windows
-    ```
+### (Optional) Set Up a Virtual Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate    # Windows
+```
 
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-4. (Optional) Install the package locally:
-    ```bash
-    pip install .
-    ```
+### (Optional) Install the Package Locally
+```bash
+pip install .
+```
 
 ---
 
 ## Usage
 
-After installing, you can run the main script:
-
+Run the main script with:
 ```bash
 python -m agentosint.core.main --help
 ```
 
-You should see a help message describing available commands and parameters. Example:
-
+Example:
 ```bash
-usage: main.py [-h] [--module MODULE_NAME] [--target TARGET] [--run-pipeline]
-
-AgentOSINT CLI
-
-optional arguments:
-  -h, --help           show this help message and exit
-  --module MODULE_NAME specify which data-collection module to run
-  --target TARGET      define target (e.g., domain, username)
-  --run-pipeline       run a predefined OSINT pipeline
+python -m agentosint.core.main --module=whois --target="example.com"
 ```
 
-### Example Command
-
-```bash
-python -m agentosint.core.main --module=example_module --target="example.com"
-```
-
-This example runs a specific module (`example_module`) on the target (`example.com`). It could return data like WHOIS information or basic reconnaissance.
+This command runs the `whois` module to fetch domain registration details.
 
 ---
 
-## Advanced Usage: Pipelines
+## OSINT Pipelines
 
-You can define and execute OSINT pipelines to automate multi-step processes. Example pipeline:
+Automate OSINT workflows by defining and executing pipelines:
 
 ```python
 from agentosint.core.pipeline import Pipeline, PipelineStep
 
 steps = [
     PipelineStep("massdns", "example.com"),
-    PipelineStep("xnldorker", "inurl:login.php"),
     PipelineStep("breacheddatascraper", "john.doe@example.com"),
 ]
 pipeline = Pipeline(steps)
 pipeline.run()
-print("\n=== Pipeline Results (JSON) ===")
+print("\n=== Pipeline Results ===")
 print(pipeline.to_json())
 ```
 
-Alternatively, use the `--run-pipeline` flag to execute a predefined pipeline.
+Alternatively, run pipelines via CLI:
+```bash
+python -m agentosint.core.main --run-pipeline
+```
 
 ---
 
-## Modules Overview
+## Supported Modules
 
-| Module                       | Input Type      | Purpose                                                                 | Output Fields                    |
-|------------------------------|-----------------|-------------------------------------------------------------------------|----------------------------------|
-| `breacheddatascraper_module` | Email           | Extract breached data related to a specific email or domain.            | `breached_accounts`, `status`    |
-| `camoufox_module`            | URL             | Scrape data from obfuscated or camouflaged sources.                     | `scraped_data`, `status`         |
-| `creepy_module`              | Social Media    | Gather geotagged data and metadata from social media platforms.         | `geodata`, `posts`, `status`     |
-| `dorkscraper_module`         | Dork string     | Perform advanced search queries using search engine dorks.              | `found_links`, `status`          |
-| `holehe_module`              | Email           | Identify services associated with an email address.                     | `found_accounts`, `status`       |
-| `infoga_module`              | Email/Domain    | Collect email headers and metadata for intelligence purposes.           | `emails`, `status`, `errors`     |
-| `massdns_module`             | Domain          | Conduct fast DNS enumeration for subdomains.                            | `found_subdomains`, `status`     |
-| `metagoofil_module`          | Domain          | Extract metadata from public documents on a target domain.              | `document_data`, `status`        |
-| `osintgram_module`           | Instagram User  | OSINT analysis on Instagram profiles.                                   | `profile_data`, `posts`, `status`|
-| `phoneinfoga_module`         | Phone Number    | Gather details about a phone number (e.g., carrier, location).          | `phone_info`, `status`           |
-| `scrapling_module`           | URL             | Perform undetectable and adaptive web scraping.                         | `scraped_data`, `status`         |
-| `sn0int_module`              | Domain/Email    | Collect domain/email intelligence with modular pipelines.               | `intelligence_data`, `status`    |
-| `tidos_module`               | Domain/IP       | Perform vulnerability assessment and reconnaissance.                    | `vulnerability_report`, `status` |
-| `waymore_module`             | URL             | Find wayback snapshots of a website for archival OSINT.                 | `snapshots`, `status`            |
-| `xnldorker_module`           | Dork string     | Advanced dork-based reconnaissance across multiple engines.             | `found_links`, `status`          |
-
-
-## Docker Instructions
-
-Build and run using Docker:
-
-1. Build the Docker image:
-    ```bash
-    docker build -t agentosint .
-    ```
-
-2. Run the container:
-    ```bash
-    docker run -it agentosint
-    ```
+| Module               | Input Type     | Purpose                                         |
+|----------------------|----------------|-------------------------------------------------|
+| `whois_module`       | Domain         | Retrieve WHOIS domain registration info         |
+| `breacheddatascraper`| Email          | Extract data from known breaches                |
+| `massdns_module`     | Domain         | Conduct DNS subdomain enumeration               |
+| `scrapling_module`   | URL            | Adaptive web scraping with stealth techniques   |
+| `osintgram_module`   | Instagram User | Social media intelligence on IG profiles        |
+| `phoneinfoga_module` | Phone Number   | Gather phone number details (carrier, location) |
+| `tidos_module`       | Domain/IP      | Perform vulnerability reconnaissance            |
+| `waymore_module`     | URL            | Find archived snapshots of a website            |
 
 ---
 
-## Further Ideas
+## Running with Docker
 
-- **Dynamic Configuration**: Use `pipeline.yaml` or `pipeline.json` for flexible pipeline definitions.
-- **Result Correlation**: Store results in SQLite/PostgreSQL for easier analysis.
-- **Web Dashboard**: Build a Flask or FastAPI interface for browser-based OSINT tasks.
-- **API Key Management**: Securely store keys in `.env` files for modules needing API access.
+### Build the Image
+```bash
+docker build -t agentosint .
+```
+
+### Run the Container
+```bash
+docker run -it agentosint
+```
+
+---
+
+## Future Enhancements
+
+- **Web Dashboard**: Interactive Flask/FastAPI-based interface.
+- **SQLite/PostgreSQL Support**: Persistent data storage for OSINT findings.
+- **API Key Management**: Secure handling of API keys for enhanced intelligence gathering.
 
 ---
 
 ## Legal Disclaimer
 
-Use AgentOSINT responsibly and ensure compliance with all applicable laws. OSINT can raise ethical and legal concerns; consult a professional if unsure.
+Use AgentOSINT responsibly and in compliance with all applicable laws. OSINT must be conducted ethically. Consult legal professionals if unsure.
 
----
+For more details, visit the [GitHub repository](https://github.com/gs-ai/AgentOSINT).
 
-For more information, visit the [GitHub repository](https://github.com/gs-ai/AgentOSINT).
-```
